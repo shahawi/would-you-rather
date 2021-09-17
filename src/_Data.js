@@ -135,7 +135,7 @@ export function _getQuestions() {
     })
 }
 
-function formatQuestion({
+function _formatQuestion({
     optionOneText,
     optionTwoText,
     author
@@ -158,7 +158,7 @@ function formatQuestion({
 export function _saveQuestion(question) {
     return new Promise((res, rej) => {
         const authedUser = question.author;
-        const formattedQuestion = formatQuestion(question)
+        const formattedQuestion = _formatQuestion(question)
 
         setTimeout(() => {
             questions = {
