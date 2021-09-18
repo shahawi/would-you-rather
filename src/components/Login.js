@@ -2,6 +2,8 @@ import React, { Component, Fragment } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { connect } from "react-redux";
 import Nav from "../UI/Nav";
+import Select from "react-select";
+import '../login.css'
 
 class Login extends Component {
   componentDidMount() {
@@ -15,13 +17,14 @@ class Login extends Component {
     return (
       <Router>
         <Fragment>
+        <Nav />
           <div className="main">
-            <Nav />
-            <ul>
-              {this.props.usersArray.map((user) => (
-                <li key={user.id}>{user.name}</li>
-              ))}
-            </ul>
+            <Select className= 'login_seelct'
+              options={ this.props.usersArray}
+              getOptionLabel={(user) => user.name}
+              getOptionValue={(user) => user.name}
+              placeholder='Please select your username'
+            />
           </div>
         </Fragment>
       </Router>
