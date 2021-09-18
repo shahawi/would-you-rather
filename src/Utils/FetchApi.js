@@ -1,10 +1,9 @@
 import {
     _getUsers,
     _getQuestions,
-    _formatQuestion,
     _saveQuestion,
     _saveQuestionAnswer,
-} from './_DATA.js'
+} from '../_Data'
 
 export function getInitialData() {
     return Promise.all([
@@ -13,11 +12,11 @@ export function getInitialData() {
     ]).then(([users, questions]) => ({
         users,
         questions,
-    }))
+    })).catch((e)  =>
+{
+    console.log(e)
 }
-
-export function formQuestion(data) {
-    return _formatQuestion(data)
+    )
 }
 
 export function saveQuestion(data) {
