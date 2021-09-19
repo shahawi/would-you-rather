@@ -3,9 +3,9 @@ import { handleInitialData } from "../actions/LoadData";
 import { connect } from "react-redux";
 import Login from "./Login";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import LoadingBar from 'react-redux-loading'
-import { getInitialData } from '../Utils/FetchApi'
-
+import LoadingBar from "react-redux-loading";
+import ProtectRoutes from "./ProtectRoutes.js";
+import Home from "./Home";
 
 class App extends Component {
   componentDidMount() {
@@ -16,11 +16,16 @@ class App extends Component {
     return (
       <Router>
         <Fragment>
-          <LoadingBar/>
+          <LoadingBar />
           <div className="container">
-            {this.props.loading === true ? <div>Null</div> : (
+            {this.props.loading === true ? (
+              <div>Null</div>
+            ) : (
               <div>
-                <Route path="/" exact component={Login} />
+                {/* <Route path="/" exact component={Login} /> */}
+                <Route path= "/" component = {Home}/>
+                <Route path= "/Login" component = {Login}/>
+
               </div>
             )}
           </div>
@@ -30,13 +35,12 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({users}) {
-
-  const usersArray = Object.entries(users)
+function mapStateToProps({ users }) {
+  const usersArray = Object.entries(users);
   return {
-    loading: usersArray.length===0,
-  users
-  }
+    loading: usersArray.length === 0,
+    users,
+  };
 }
 
 export default connect(mapStateToProps)(App);
