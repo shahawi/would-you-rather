@@ -49,10 +49,10 @@ export function handleAddQuestionAnswer (text) {
       .then(() => dispatch(hideLoading()))
   }
 }
-export function receiveQuestions (tweets) {
+export function receiveQuestions (questions) {
   return {
     type:RECEIVE_QUESTIONS,
-    tweets,
+    questions,
   }
 }
 
