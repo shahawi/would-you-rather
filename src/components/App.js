@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import Login from "./Login";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import LoadingBar from "react-redux-loading";
-import ProtectRoutes from "./ProtectRoutes.js";
 import Home from "./Home";
 
 class App extends Component {
@@ -25,7 +24,6 @@ class App extends Component {
                 {/* <Route path="/" exact component={Login} /> */}
                 <Route path= "/" component = {Home}/>
                 <Route path= "/Login" component = {Login}/>
-
               </div>
             )}
           </div>
