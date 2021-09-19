@@ -12,12 +12,6 @@ class App extends Component {
     this.props.dispatch(handleInitialData());
   }
 
-  componentDidUpdate()
-  {
-
-    console.log(this.props.users)
-  }
-
   render() {
     return (
       <Router>

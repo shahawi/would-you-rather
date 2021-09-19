@@ -1,30 +1,42 @@
 import React, { Component, Fragment } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import Nav from "../UI/Nav";
 import Select from "react-select";
-import '../login.css'
+import "../login.css";
+import { handleLogin } from "../actions/LoadData";
+import Home from "./Home";
 
 class Login extends Component {
   componentDidMount() {
     console.log("start", this.props.usersArray[0]);
   }
 
-  componentDidUpdate() {
-    console.log(this.props);
-  }
+handleChange = (e) =>
+{
+  console.log('login id', e.id)
+ handleLogin(e.id) 
+ this.props.history.push(`/Home`)
+
+
+}
+
   render() {
     return (
       <Router>
         <Fragment>
-        <Nav />
+          <Nav />
           <div className="main">
-            <Select className= 'login_seelct'
-              options={ this.props.usersArray}
+            <Select
+              className="login_seelct"
+              options={this.props.usersArray}
+              onChange={this.handleChange}
               getOptionLabel={(user) => user.name}
               getOptionValue={(user) => user.name}
-              placeholder='Please select your username'
+              placeholder="Please select your username"
             />
+             <Route path="/Home" component={Home} />
+
           </div>
         </Fragment>
       </Router>
