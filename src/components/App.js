@@ -17,9 +17,8 @@ class App extends Component {
     return (
       <Router>
         <Fragment>
-          <Tabs>
+        <Nav />
             <div>
-              <Nav />
               <LoadingBar />
               <div className="container">
                 {this.props.loading === true ? (
@@ -33,7 +32,7 @@ class App extends Component {
                 )}
               </div>
             </div>
-          </Tabs>
+       
         </Fragment>
       </Router>
     );
