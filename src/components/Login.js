@@ -28,7 +28,7 @@ class Login extends Component {
     return (
       <Router>
         <Fragment>
-          <Nav />
+      
           <div className="main">
             <Select
               className="login_seelct"
