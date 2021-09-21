@@ -11,6 +11,7 @@ import Pollpage from "./Pollpage";
 import { Switch } from "react-router-dom/cjs/react-router-dom.min";
 import AnsweredQuestions from "./AnsweredQuestions";
 import UnAnsweredQuestions from "./UnAnsweredQuestions";
+import PollResults from "./PollResults";
 
 class App extends Component {
   componentDidMount() {
@@ -33,10 +34,11 @@ class App extends Component {
                     <Route path="/" exact component={Login} />
                     <Route path={["/Home"]} component={Home} />
                     <Route path="/Login" component={Login} />
-                    <Route path="/question/:id" component={Pollpage} />
                     <Route path="/Answered" component={AnsweredQuestions} />
                     <Route path="/Unanswered" component={UnAnsweredQuestions} />
-                    </Switch>
+                    <Route path="/question/:id" component={Pollpage} />
+                    <Route path="/results/:id"component={PollResults} />
+                  </Switch>
                 </div>
               )}
             </div>

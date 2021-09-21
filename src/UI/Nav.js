@@ -19,7 +19,7 @@ export default function Nav () {
             Login
           </NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink to='/Unanswered' activeClassName='active'>
             UnAnswered questions
           </NavLink>
@@ -28,7 +28,7 @@ export default function Nav () {
           <NavLink to='/Answered' activeClassName='active'>
             Answered questions
           </NavLink>
-        </li>
+        </li> */}
       </ul>
     </nav>
   )

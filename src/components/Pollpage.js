@@ -1,46 +1,47 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
-import { _formatQuestion } from "../_Data";
+import { _formatQuestion, _saveQuestionAnswer } from "../_Data";
 import Card from "react-bootstrap/Card";
 import { Button } from "bootstrap";
 import input from "react-input";
+import { Router, withRouter } from "react-router";
 
 class PollPage extends Component {
-  
-    constructor(props) {
-        super(props);
-    
- this.onChangeValue= this.onChangeValue.bind(this)
- this.handleSubmit= this.handleSubmit.bind(this)
+  constructor(props) {
+    super(props);
 
-        };
+    this.onChangeValue = this.onChangeValue.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
   state = {
-choice: ""
+    choice: "",
+  };
 
-  }
-
-  onChangeValue(e)
-  {
-    
+  onChangeValue(e) {
     this.setState(() => ({
-        choice: e.target.value,
-      }));
+      choice: e.target.value,
+    }));
   }
-  
-    handleSubmit(e) {
+
+  handleSubmit(e) {
     e.preventDefault();
-    if(this.state.choice=== "")
-    {
-        alert("Please make a choice!!")
+    if (this.state.choice === "") {
+      alert("Please make a choice!!");
     }
-        console.log(this.state.choice)
+    console.log(this.state.choice);
+    _saveQuestionAnswer(
+      this.props.authedUser,
+      this.props.id,
+      this.state.choice
+    ).then(this.props.history.push(`/results/${this.props.id}`));
   }
   componentDidMount() {
     if (this.props.authedUser === null) {
       alert("Please login first");
       this.props.history.push(`/Login`);
-      if (this.props.authedUser !== null) {
+    }
+    else {
         const question = this.props.questions[this.props.id];
         const formattedQuestion = _formatQuestion(
           question.optionOne,
@@ -48,12 +49,13 @@ choice: ""
           question.author
         );
         console.log("form", formattedQuestion);
-      }
+      
     }
   }
 
   render() {
     return (
+      
       <div style={{ marginLeft: "10rem" }}>
         {this.props.authedUser !== null && (
           <Card style={{ width: "18rem" }}>
@@ -67,25 +69,24 @@ choice: ""
                 <input
                   type="radio"
                   value={this.props.questions[this.props.id].optionOne.text}
-                  name= "radio"
+                  name="radio"
                 />
                 {this.props.questions[this.props.id].optionOne.text}
                 <br />
                 <input
                   type="radio"
                   value={this.props.questions[this.props.id].optionTwo.text}
-                  name=
-                 "radio"
-                  
+                  name="radio"
                 />
                 {this.props.questions[this.props.id].optionTwo.text}
-
-                <button onClick = {this.handleSubmit}>Submit</button>
+                <br />
+                <button onClick={this.handleSubmit}>Submit</button>
               </div>
             </Card.Body>
           </Card>
         )}
       </div>
+    
     );
   }
 }
@@ -101,4 +102,4 @@ function mapStateToProps(state, props) {
   };
 }
 
-export default connect(mapStateToProps)(PollPage);
+export default withRouter(connect(mapStateToProps)(PollPage));
