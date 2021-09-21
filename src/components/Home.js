@@ -2,8 +2,8 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import "../Home.css";
-import Tabs from "react-bootstrap/Tabs";
-import Tab from "react-bootstrap/Tab";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
 import { _formatQuestion } from "../_Data";
 import UnAnsweredQuestions from "./UnAnsweredQuestions";
 import AnsweredQuestions from "./AnsweredQuestions";
@@ -31,11 +31,18 @@ class Home extends Component {
                 marginLeft: "10rem",
               }}
             >
-              <Switch>
-              <UnAnsweredQuestions />
-
-              <AnsweredQuestions />
-</Switch>
+              <Tabs>
+                <TabList>
+                  <Tab>Title 1</Tab>
+                  <Tab>Title 2</Tab>
+                </TabList>
+                <TabPanel>
+                  <UnAnsweredQuestions />
+                </TabPanel>
+                <TabPanel>
+                  <AnsweredQuestions />
+                </TabPanel>
+              </Tabs>
             </div>
           </Fragment>
         )}
