@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import React, { Component} from "react";
+
 import { connect } from "react-redux";
-import { Link, withRouter } from 'react-router-dom'
+
 
 class PollPage extends Component {
 

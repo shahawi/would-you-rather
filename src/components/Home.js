@@ -4,11 +4,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "../Home.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import { _formatQuestion } from "../_Data";
-import UnAnsweredQuestions from "./UnAnsweredQuestions";
-import AnsweredQuestions from "./AnsweredQuestions";
-import { Switch } from "react-router-dom/cjs/react-router-dom.min";
-import { Link, withRouter } from 'react-router-dom'
 
 
 

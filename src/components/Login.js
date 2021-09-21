@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { connect } from "react-redux";
-import Nav from "../UI/Nav";
 import Select from "react-select";
 import "../login.css";
 import { setAuthedUser } from '../actions/authedUser'

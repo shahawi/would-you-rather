@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import LoadingBar from "react-redux-loading";
 import Home from "./Home";
 import Nav from "../UI/Nav";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+
 import Pollpage from "./Pollpage";
 import { Switch } from "react-router-dom/cjs/react-router-dom.min";
 import AnsweredQuestions from "./AnsweredQuestions";
