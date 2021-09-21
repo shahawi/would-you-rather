@@ -4,8 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "../Home.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import sarah from "../sarah.png"
-
+import { _formatQuestion } from "../_Data";
 
 class Home extends Component {
   constructor(props) {
@@ -13,11 +12,18 @@ class Home extends Component {
 
     this.toPollPage = this.toPollPage.bind(this);
     this.toPollResults = this.toPollResults.bind(this);
+    this.returnAvatar = this.returnAvatar.bind(this);
   }
 
-
+  returnAvatar(question) {
+    const user = this.props.usersArray.filter((a) => a.id === question.author);
+    const url = user[0].avatarURL;
+    console.log(`{'${url}'}`)
+    return {
+      url,
+    };
+  }
   componentDidMount() {
-
     if (this.props.authedUser === null) {
       this.props.history.push(`/Login`);
     }
@@ -34,7 +40,7 @@ class Home extends Component {
   render() {
     if (this.props.authedUser !== null) {
       const authedUser = this.props.authedUser;
-      const user = this.props.users[authedUser];
+      var user = this.props.users[authedUser];
       var unAnsweredquestions = Object.values(this.props.questions).filter(
         (question) => !user.answers.hasOwnProperty(question.id)
       );
@@ -42,6 +48,9 @@ class Home extends Component {
       var answeredquestions = Object.values(this.props.questions).filter(
         (question) => user.answers.hasOwnProperty(question.id)
       );
+
+      unAnsweredquestions.sort((a, b) => b.timestamp - a.timestamp);
+      answeredquestions.sort((a, b) => b.timestamp - a.timestamp);
     }
 
     return (
@@ -53,7 +62,6 @@ class Home extends Component {
                 marginLeft: "5rem",
               }}
             >
-
               <Tabs>
                 <TabList>
                   <Tab>Unanswered Questions</Tab>
@@ -74,7 +82,12 @@ class Home extends Component {
                       >
                         <div className="card border-primary mb-3">
                           <h5 className="card-title">{question.author}</h5>
-                          <img alt = "avatar" src = {sarah} height = "60px" width = "60px"></img>
+                          <img
+                            alt="avatar"
+                            src={`${this.returnAvatar(question).url}`}
+                            height="60px"
+                            width="60px"
+                          ></img>
                           <h6 className="card-subtitle mb-2 text-muted">
                             Would you rather
                           </h6>
@@ -112,6 +125,12 @@ class Home extends Component {
                       >
                         <div className="card border-primary mb-3">
                           <h5 className="card-title">{question.author}</h5>
+                          <img
+                            alt="avatar"
+                            src={`${this.returnAvatar(question).url}`}
+                            height="60px"
+                            width="60px"
+                          ></img>
                           <h6 className="card-subtitle mb-2 text-muted">
                             Would you rather
                           </h6>
@@ -146,11 +165,13 @@ class Home extends Component {
 function mapStateToProps(state, { id }) {
   const question = state.questions[id];
   // const formattedQuestion =  _formatQuestion(question1.optionOne,question1.optionTwo,question1.author)
+  const usersArray = Object.values(state.users);
   return {
     questions: state.questions,
     users: state.users,
     authedUser: state.authedUser,
     question,
+    usersArray,
   };
 }
 
