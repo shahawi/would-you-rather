@@ -10,11 +10,16 @@ class UnansweredQuestions extends Component {
       };
     render() {
 
+        const authedUser = this.props.authedUser
+        const user = this.props.users[authedUser]
+        console.log(user)
     const unAnsweredquestions = Object.values(this.props.questions).filter(
-        (question) => question.answers !== null
+        (question) => user.answers.hasOwnProperty(question.id)
       );
+
+  
     return (
-      <div className="tab-pane" id="a" role="tabpanel">
+      <div>
         {unAnsweredquestions.map((question) => (
           <div
             className="card"
@@ -51,7 +56,10 @@ class UnansweredQuestions extends Component {
 }
 
 function mapStateToProps(state) {
-  return {questions: state.questions}
+  return {questions: state.questions,
+users:state.users,
+authedUser: state.authedUser
+}
 }
 
 export default connect(mapStateToProps)(UnansweredQuestions);

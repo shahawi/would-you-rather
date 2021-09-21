@@ -4,15 +4,29 @@ import { NavLink } from 'react-router-dom'
 export default function Nav () {
   return (
     <nav className='nav' >
-      <ul style={{ display: "flex", flexDirection: "row" ,justifycontent: 'space-between',marginLeft: '10rem'}}>
+      <ul style={{  height: "100px",
+  display: "flex",
+  flexDirection: "column",
+  flexWrap: "wrap",
+  }}>
         <li>
-          <NavLink to='/' exact activeClassName='active' style = {{marginRight:'10rem'}} >
+          <NavLink to='/Home' exact activeClassName='active' style = {{marginRight:'10rem'}} >
             Home
           </NavLink>
         </li>
         <li>
           <NavLink to='/Login' activeClassName='active'>
             Login
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to='/Unanswered' activeClassName='active'>
+            UnAnswered questions
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to='/Answered' activeClassName='active'>
+            Answered questions
           </NavLink>
         </li>
       </ul>

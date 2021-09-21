@@ -21,26 +21,26 @@ class App extends Component {
     return (
       <Router>
         <Fragment>
-        <Nav />
-            <div>
-              <LoadingBar />
-              <div className="container">
-                {this.props.loading === true ? (
-                  <div>Null</div>
-                ) : (
-                  <div>
-                    {/* <Route path="/" exact component={Login} /> */}
-                    <Route path={["/"]} component={Home} />
+          <Nav />
+          <div>
+            <LoadingBar />
+            <div className="container">
+              {this.props.loading === true ? (
+                <div>Null</div>
+              ) : (
+                <div>
+                  <Switch>
+                    <Route path="/" exact component={Login} />
+                    <Route path={["/Home"]} component={Home} />
                     <Route path="/Login" component={Login} />
-                    <Route path='/question/:id' component={Pollpage} />
-                    <Route path="/Unanswered" component={UnAnsweredQuestions} /> 
+                    <Route path="/question/:id" component={Pollpage} />
                     <Route path="/Answered" component={AnsweredQuestions} />
-
-                  </div>
-                )}
-              </div>
+                    <Route path="/Unanswered" component={UnAnsweredQuestions} />
+                  </Switch>
+                </div>
+              )}
             </div>
-       
+          </div>
         </Fragment>
       </Router>
     );

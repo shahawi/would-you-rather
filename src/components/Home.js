@@ -22,48 +22,24 @@ class Home extends Component {
     this.props.history.push(`/question/${id}`);
   };
   render() {
-    const unAnsweredquestions = Object.values(this.props.questions).filter(
-      (question) => question.answers !== null
-    );
-    const answeredquestions = Object.values(this.props.questions).filter(
-      (question) => question.answers === null
-    );
-
-    const formattedQuestion = (question) =>
-      _formatQuestion(question.optionOne, question.optionTwo, question.author);
     return (
-      <Router>
+      <div>
         {this.props.authedUser !== null && (
           <Fragment>
-            <nav>
-              <ul className="nav nav-tabs">
-                <li className="nav-item">
-                  <a className="nav-link active" data-toggle="tab" href="#a">
-                    unAnsweredquestions
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" data-toggle="tab" href="#b">
-                    answeredquestions
-                  </a>
-                </li>
-              </ul>
-            </nav>
             <div
-              className="tab-content"
               style={{
                 marginLeft: "10rem",
               }}
             >
               <Switch>
-                <UnAnsweredQuestions />
+              <UnAnsweredQuestions />
 
-                <AnsweredQuestions />
-              </Switch>
+              <AnsweredQuestions />
+</Switch>
             </div>
           </Fragment>
         )}
-      </Router>
+      </div>
     );
   }
 }

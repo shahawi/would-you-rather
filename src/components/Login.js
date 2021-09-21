@@ -14,6 +14,9 @@ class Login extends Component {
 
   componentDidMount() {
     console.log("start", this.props.usersArray[0]);
+    if (this.props.authedUser !== null) {
+      this.props.history.push(`/Home`);
+    }
   }
 
   handleChange = (e) => {

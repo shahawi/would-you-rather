@@ -10,12 +10,18 @@ class AnsweredQuestions extends Component {
       };
     render() {
 
+        const authedUser = this.props.authedUser
+        const user = this.props.users[authedUser]
+        console.log(user)
+
     const answeredquestions = Object.values(this.props.questions).filter(
-        (question) => question.answers === null
+        (question) => !user.answers.hasOwnProperty(question.id)
       );
+
+      console.log('Answered',answeredquestions)
     return (
         <Router>
-      <div className="tab-pane" id="b" role="tabpanel">
+      <div>
         {answeredquestions.map((question) => (
           <div
             className="card"
@@ -52,12 +58,11 @@ class AnsweredQuestions extends Component {
   }
 }
 
-function mapStateToProps(state)
-{
-
-return{
-    questions: state.questions
-}
-}
+function mapStateToProps(state) {
+    return {questions: state.questions,
+  users:state.users,
+  authedUser: state.authedUser
+  }
+  }
 
 export default connect(mapStateToProps)(AnsweredQuestions);
