@@ -1,24 +1,26 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
+import { Link, withRouter } from 'react-router-dom'
+
 
 class AnsweredQuestions extends Component {
 
     toPolPage = (e, id) => {
         e.preventDefault();
+        console.log(this.props)
         this.props.history.push(`/question/${id}`);
       };
     render() {
 
         const authedUser = this.props.authedUser
         const user = this.props.users[authedUser]
-        console.log(user)
 
     const answeredquestions = Object.values(this.props.questions).filter(
         (question) => !user.answers.hasOwnProperty(question.id)
       );
 
-      console.log('Answered',answeredquestions)
+
     return (
         <Router>
       <div>
@@ -65,4 +67,4 @@ function mapStateToProps(state) {
   }
   }
 
-export default connect(mapStateToProps)(AnsweredQuestions);
+export default withRouter(connect(mapStateToProps)(AnsweredQuestions));

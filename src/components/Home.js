@@ -8,6 +8,9 @@ import { _formatQuestion } from "../_Data";
 import UnAnsweredQuestions from "./UnAnsweredQuestions";
 import AnsweredQuestions from "./AnsweredQuestions";
 import { Switch } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, withRouter } from 'react-router-dom'
+
+
 
 class Home extends Component {
   componentDidMount() {
@@ -17,13 +20,14 @@ class Home extends Component {
     }
   }
 
-  toPolPage = (e, id) => {
-    e.preventDefault();
-    this.props.history.push(`/question/${id}`);
-  };
+  // toPolPage = (e, id) => {
+  //   e.preventDefault();
+  //   this.props.history.push(`/question/${id}`);
+  // };
   render() {
     return (
-      <div>
+      <Router>
+ 
         {this.props.authedUser !== null && (
           <Fragment>
             <div
@@ -33,8 +37,8 @@ class Home extends Component {
             >
               <Tabs>
                 <TabList>
-                  <Tab>Title 1</Tab>
-                  <Tab>Title 2</Tab>
+                  <Tab>Unanswered Questions</Tab>
+                  <Tab>AnsweredQuestions</Tab>
                 </TabList>
                 <TabPanel>
                   <UnAnsweredQuestions />
@@ -45,8 +49,9 @@ class Home extends Component {
               </Tabs>
             </div>
           </Fragment>
+         
         )}
-      </div>
+         </Router>
     );
   }
 }
@@ -61,4 +66,4 @@ function mapStateToProps(state, { id }) {
   };
 }
 
-export default connect(mapStateToProps)(Home);
+export default withRouter(connect(mapStateToProps)(Home));
