@@ -18,7 +18,6 @@ class Home extends Component {
   returnAvatar(question) {
     const user = this.props.usersArray.filter((a) => a.id === question.author);
     const url = user[0].avatarURL;
-    console.log(`{'${url}'}`)
     return {
       url,
     };
@@ -31,7 +30,7 @@ class Home extends Component {
 
   toPollPage = (e, id) => {
     e.preventDefault();
-    this.props.history.push(`/question/${id}`);
+    this.props.history.push(`/questions/${id}`);
   };
   toPollResults = (e, id) => {
     e.preventDefault();

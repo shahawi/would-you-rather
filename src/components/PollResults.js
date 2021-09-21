@@ -1,10 +1,15 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import Card from "react-bootstrap/Card";
-import { _formatQuestion } from "../_Data";
-import { Router } from "react-router";
+
 
 class PollResults extends Component {
+  constructor(props)
+  {
+    super(props)
+    this.returnAvatar = this.returnAvatar.bind(this);
+this.handlecolor = this.handlecolor.bind(this)
+  }
   componentDidMount() {
     if (this.props.authedUser === null) {
       alert("Please login first");
@@ -13,19 +18,51 @@ class PollResults extends Component {
     }
   }
 
+  handlecolor(option,question)
+  {
+    const user = this.props.usersArray.filter((a) => a.id === question.author);
+    const answers = Object.entries(user[0].answers)
+const answer = answers.filter((a)=> a[0] === question.id)
+    console.log(answer[0][1])
+    return answer[0][1] === option
+    
+
+  }
+
+  returnAvatar(question) {
+    const user = this.props.usersArray.filter((a) => a.id === question.author);
+    const url = user[0].avatarURL;
+    console.log(`{'${url}'}`)
+    return {
+      url,
+    };
+  }
+
   render() {
+    var question  = this.props.questions[this.props.id]
+    var handlecolor  =   (option) =>  { const user = this.props.usersArray.filter((a) => a.id === this.props.authedUser)
+    const answers = Object.entries(user[0].answers)
+const answer = answers.filter((a)=> a[0] === question.id)
+    console.log(answer[0][1])
+    return answer[0][1] === option && 'red'
+    }
     return (
       <div style={{ marginLeft: "10rem" }}>
         {this.props.authedUser !== null && (
           <Card style={{ width: "18rem" }}>
-            {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
             <Card.Body>
               <Card.Title>
-                {this.props.questions[this.props.id].author} asks:
+                {question.author} asks:
               </Card.Title>
+              <img
+                            alt="avatar"
+                            src={`../${this.returnAvatar(question).url}`}
+                            height="60px"
+                            width="60px"
+                          ></img>
               <Card.Text>Would you rather?</Card.Text>
               <div>
-                <div>
+                <div  style = {{color: handlecolor("optionOne")}} >
                   {this.props.questions[this.props.id].optionOne.text}
                   <br />
                   {"[" +
@@ -42,7 +79,7 @@ class PollResults extends Component {
                     "%"}
                 </div>
                 <br />
-                <div>
+                <div style = {{color: handlecolor("optionTwo")}} >
                   {this.props.questions[this.props.id].optionTwo.text}
                   <br />
                   {"[" +
@@ -69,11 +106,13 @@ class PollResults extends Component {
 }
 function mapStateToProps(state, props) {
   const { id } = props.match.params;
+  const usersArray = Object.values(state.users)
 
   return {
     state,
     id,
     authedUser: state.authedUser,
+    usersArray,
     questions: state.questions,
   };
 }

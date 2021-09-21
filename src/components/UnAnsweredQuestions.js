@@ -14,7 +14,7 @@ class UnansweredQuestions extends Component {
   toPolPage = (e, id) => {
     e.preventDefault();
 
-    this.props.history.push(`/question/${id}`);
+    this.props.history.push(`/questions/${id}`);
   };
   render() {
     const authedUser = this.props.authedUser;

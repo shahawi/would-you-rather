@@ -14,7 +14,6 @@ class Leaderboard extends Component {
   render() {
 
 var usersArray = this.props.usersArray;
-console.log("hi",usersArray[0].questions) 
 usersArray.sort((a,b) => (b.questions.length+Object.keys(b.answers).length) - (a.questions.length+Object.keys(a.answers).length))
 
 

@@ -38,14 +38,7 @@ class PollPage extends Component {
     dispatch(addQuestionAnswer (authedUser, qid,answer))
     this.props.history.push(`/results/${this.props.id}`)
 
-    // _saveQuestionAnswer({
-    //   authedUser,
-    //   qid: id,
-    //   answer: choice,
-    // }).then(
-    //   console.log(this.props),
-    //   this.props.history.push(`/results/${this.props.id}`)
-    // );
+
   }
   componentDidMount() {
     if (this.props.authedUser === null) {

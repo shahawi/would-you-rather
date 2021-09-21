@@ -20,7 +20,6 @@ class Logout extends Component {
     var user = this.props.usersArray.filter(
       (e) => e.id === this.props.authedUser
     );
-    console.log(user[0]);
     return (
       <div style = {{marginLeft : "10rem", marginBottom:"2rem", marginTop: "2rem"}}>
              <img
@@ -39,7 +38,6 @@ class Logout extends Component {
 
 function mapStateToProps(state) {
   const usersArray = Object.values(state.users);
-  console.log(usersArray);
   return {
     usersArray,
     authedUser: state.authedUser,

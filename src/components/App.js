@@ -44,7 +44,7 @@ class App extends Component {
                     <Route path="/Login" component={Login} />
                     <Route path="/Answered" component={AnsweredQuestions} />
                     <Route path="/Unanswered" component={UnAnsweredQuestions} />
-                    <Route path="/question/:id" component={Pollpage} />
+                    <Route path="/questions/:question_id" component={Pollpage} />
                     <Route path="/results/:id" component={PollResults} />
                     <Route path="/add" component={AddNewQuestion} />
                     <Route path="/leaderboard" component={Leaderboard} />

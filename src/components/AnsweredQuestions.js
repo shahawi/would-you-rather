@@ -8,7 +8,7 @@ class AnsweredQuestions extends Component {
 
     toPolPage = (e, id) => {
         e.preventDefault();
-        this.props.history.push(`/question/${id}`);
+        this.props.history.push(`/questions/${id}`);
       };
     render() {
 
