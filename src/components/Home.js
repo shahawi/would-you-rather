@@ -29,7 +29,7 @@ class Home extends Component {
 
   toPollPage = (e, id) => {
     e.preventDefault();
-    this.props.history.push(`/questions/${id}`);
+    this.props.history.push(`/question/${id}`);
   };
   toPollResults = (e, id) => {
     e.preventDefault();

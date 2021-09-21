@@ -47,7 +47,7 @@ class App extends Component {
                     <Route path={["/Home"]} component={Home} />
                     <Route path="/Login" component={Login} />
                     <Route
-                      path="/questions/:question_id"
+                      path="/question/:id"
                       component={Pollpage}
                     />
                     <Route path="/results/:id" component={PollResults} />

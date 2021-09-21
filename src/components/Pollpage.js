@@ -32,7 +32,7 @@ class PollPage extends Component {
     const authedUser = this.props.authedUser;
     const dispatch = this.props.dispatch
     dispatch(addQuestionAnswer (authedUser, qid,answer))
-    this.props.history.push(`/results/${this.props.id}`)
+    this.props.history.push(`/Home`)
 
 
   }
@@ -87,6 +87,7 @@ function mapStateToProps(state, props) {
     id,
     authedUser: state.authedUser,
     users: state.users,
+    questions: state.questions
   };
 }
 
