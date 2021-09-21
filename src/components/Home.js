@@ -34,11 +34,11 @@ this.toPollResults = this.toPollResults.bind(this)
       const authedUser = this.props.authedUser;
       const user = this.props.users[authedUser];
       var unAnsweredquestions = Object.values(this.props.questions).filter(
-        (question) => user.answers.hasOwnProperty(question.id)
+        (question) => !user.answers.hasOwnProperty(question.id)
       );
 
       var answeredquestions = Object.values(this.props.questions).filter(
-        (question) => !user.answers.hasOwnProperty(question.id)
+        (question) => user.answers.hasOwnProperty(question.id)
       );
     }
 

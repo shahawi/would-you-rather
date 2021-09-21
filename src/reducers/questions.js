@@ -19,11 +19,19 @@ export default function questions(state = {}, action) {
         [action.question.id]: action.question,
       };
     case SAVE_QUESTION_ANSWER:
-      const { question_answer } = action;
-
+      const authedUser = action.authedUser;
+      const qid = action.qid;
+      const answer = action.answer;
+    
       return {
         ...state,
-        [action.question_answer.id]: action.question_answer,
+        [qid]: {
+          ...state[qid],
+          [answer]: {
+            ...state[qid][answer],
+            votes: [...state[qid][answer].votes, authedUser]
+          },
+        },
       };
     default:
       return state;

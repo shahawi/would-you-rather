@@ -12,11 +12,15 @@ function addQuestion ({ id, authedUser }) {
     authedUser,
   }
 }
-function addQuestionAnswer ({ id, authedUser }) {
+export function addQuestionAnswer ( authedUser,
+  qid,
+  answer) {
   return {
     type: SAVE_QUESTION_ANSWER,
-    id,
-    authedUser,
+      authedUser, 
+      qid,
+      answer
+ 
   }
 }
 
@@ -35,17 +39,19 @@ export function handleAddQuestion (text) {
       .then(() => dispatch(hideLoading()))
   }
 }
-export function handleAddQuestionAnswer (text) {
+export function handleAddQuestionAnswer ( authedUser,
+  qid,
+  answer) {
   return (dispatch, getState) => {
-    const { authedUser } = getState()
 
     dispatch(showLoading())
 
-    return saveQuestionAnswer({
-      text,
-      author: authedUser,
-    })
-      .then((questionAnswer) => dispatch(addQuestionAnswer(questionAnswer)))
+    return saveQuestionAnswer( authedUser,
+      qid,
+      answer)
+      .then(() => dispatch(addQuestionAnswer(authedUser,
+        qid,
+        answer)))
       .then(() => dispatch(hideLoading()))
   }
 }

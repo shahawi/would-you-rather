@@ -23,6 +23,10 @@ export function saveQuestion(data) {
     return _saveQuestion(data)
 }
 
-export function saveQuestionAnswer(data) {
-    return _saveQuestionAnswer(data)
+export function saveQuestionAnswer( authedUser,
+    qid,
+    answer) {
+    return _saveQuestionAnswer( authedUser,
+        qid,
+        answer)
 }
