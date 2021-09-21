@@ -4,6 +4,11 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "../Home.css";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
+import { _formatQuestion } from "../_Data";
+import UnAnsweredQuestions from "./UnAnsweredQuestions";
+import AnsweredQuestions from "./AnsweredQuestions";
+import { Switch } from "react-router-dom/cjs/react-router-dom.min";
+
 class Home extends Component {
   componentDidMount() {
     if (this.props.authedUser === null) {
@@ -11,6 +16,11 @@ class Home extends Component {
       this.props.history.push(`/Login`);
     }
   }
+
+  toPolPage = (e, id) => {
+    e.preventDefault();
+    this.props.history.push(`/question/${id}`);
+  };
   render() {
     const unAnsweredquestions = Object.values(this.props.questions).filter(
       (question) => question.answers !== null
@@ -18,101 +28,38 @@ class Home extends Component {
     const answeredquestions = Object.values(this.props.questions).filter(
       (question) => question.answers === null
     );
+
+    const formattedQuestion = (question) =>
+      _formatQuestion(question.optionOne, question.optionTwo, question.author);
     return (
       <Router>
         {this.props.authedUser !== null && (
           <Fragment>
-            <ul class="nav nav-tabs">
-              <li>
-                <a href="#a" data-toggle="tab">
-                  unAnsweredquestions
-                </a>
-              </li>
-              <li>
-                <a href="#b" data-toggle="tab">
-                  answeredquestions
-                </a>
-              </li>
-            </ul>
-
-            <div class="tab-content">
-              <div
-                style={{
-                  marginLeft: "10rem",
-                }}
-              >
-                <div class="tab-pane active" id="a">
-                  {unAnsweredquestions.map((question) => (
-                    <div
-                      className="card"
-                      style={{
-                        width: "25rem",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        flex: 1,
-                      }}
-                      key={question.id}
-                    >
-                      <div className="card border-primary mb-3">
-                        <h5 className="card-title">{question.author}</h5>
-                        <h6 className="card-subtitle mb-2 text-muted">
-                          Would you rather
-                        </h6>
-                        <p
-                          className="card-text"
-                          style={{ flex: 1, flexWrap: "wrap" }}
-                        >
-                          {" "}
-                          {question.optionOne.text} or ....
-                        </p>
-                        <button className="btn btn-primary" type="submit">
-                          View poll
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <nav>
+              <ul className="nav nav-tabs">
+                <li className="nav-item">
+                  <a className="nav-link active" data-toggle="tab" href="#a">
+                    unAnsweredquestions
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" data-toggle="tab" href="#b">
+                    answeredquestions
+                  </a>
+                </li>
+              </ul>
+            </nav>
             <div
-              class="tab-pane"
-              id="b"
+              className="tab-content"
               style={{
-                display: "flex",
-                flexDirection: "column",
-                alignSelf: "center",
-                marginLeft: "25rem",
+                marginLeft: "10rem",
               }}
             >
-              {answeredquestions.map((question) => (
-                <div
-                  className="card"
-                  style={{
-                    width: "25rem",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    flex: 1,
-                  }}
-                  key={question.id}
-                >
-                  <div className="card border-primary mb-3">
-                    <h5 className="card-title">{question.author}</h5>
-                    <h6 className="card-subtitle mb-2 text-muted">
-                      Would you rather
-                    </h6>
-                    <p
-                      className="card-text"
-                      style={{ flex: 1, flexWrap: "wrap" }}
-                    >
-                      {" "}
-                      {question.optionOne.text} or ....
-                    </p>
-                    <button className="btn btn-primary" type="submit">
-                      View poll
-                    </button>
-                  </div>
-                </div>
-              ))}
+              <Switch>
+                <UnAnsweredQuestions />
+
+                <AnsweredQuestions />
+              </Switch>
             </div>
           </Fragment>
         )}
@@ -121,10 +68,13 @@ class Home extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, { id }) {
+  const question = state.questions[id];
+  // const formattedQuestion =  _formatQuestion(question1.optionOne,question1.optionTwo,question1.author)
   return {
     authedUser: state.authedUser,
     questions: state.questions,
+    question,
   };
 }
 

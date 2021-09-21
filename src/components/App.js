@@ -7,6 +7,10 @@ import LoadingBar from "react-redux-loading";
 import Home from "./Home";
 import Nav from "../UI/Nav";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import Pollpage from "./Pollpage";
+import { Switch } from "react-router-dom/cjs/react-router-dom.min";
+import AnsweredQuestions from "./AnsweredQuestions";
+import UnAnsweredQuestions from "./UnAnsweredQuestions";
 
 class App extends Component {
   componentDidMount() {
@@ -26,8 +30,12 @@ class App extends Component {
                 ) : (
                   <div>
                     {/* <Route path="/" exact component={Login} /> */}
-                    <Route path="/" component={Home} />
+                    <Route path={["/"]} component={Home} />
                     <Route path="/Login" component={Login} />
+                    <Route path='/question/:id' component={Pollpage} />
+                    <Route path="/Unanswered" component={UnAnsweredQuestions} /> 
+                    <Route path="/Answered" component={AnsweredQuestions} />
+
                   </div>
                 )}
               </div>

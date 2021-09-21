@@ -135,7 +135,7 @@ export function _getQuestions() {
     })
 }
 
-function _formatQuestion({
+export function _formatQuestion({
     optionOneText,
     optionTwoText,
     author
