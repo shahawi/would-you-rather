@@ -1,7 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { Router } from "react-router-dom/cjs/react-router-dom.min";
 import { setAuthedUser } from "../actions/authedUser";
 
 class Logout extends Component {

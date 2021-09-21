@@ -4,7 +4,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "../Home.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import { setAuthedUser } from "../actions/authedUser";
+import sarah from "../sarah.png"
+
 
 class Home extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class Home extends Component {
 
 
   componentDidMount() {
+
     if (this.props.authedUser === null) {
       this.props.history.push(`/Login`);
     }
@@ -72,6 +74,7 @@ class Home extends Component {
                       >
                         <div className="card border-primary mb-3">
                           <h5 className="card-title">{question.author}</h5>
+                          <img alt = "avatar" src = {sarah} height = "60px" width = "60px"></img>
                           <h6 className="card-subtitle mb-2 text-muted">
                             Would you rather
                           </h6>
