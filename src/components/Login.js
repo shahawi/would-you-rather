@@ -19,7 +19,6 @@ class Login extends Component {
   }
 
   handleChange = (e) => {
-    console.log("login id", e.id);
     const {dispatch} = this.props
     dispatch(setAuthedUser(e.id))
     this.props.history.push(`/Home`)

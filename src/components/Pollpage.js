@@ -6,14 +6,12 @@ import { Link, withRouter } from 'react-router-dom'
 class PollPage extends Component {
 
     componentDidMount(){
-        console.log("shown")
         if (this.props.authedUser === null) {
             alert("Please login first");
             this.props.history.push(`/Login`);
           }
     }
   render() {
-    console.log('poll',this.props);
 
     return (
   <div>
