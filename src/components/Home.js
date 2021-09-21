@@ -4,12 +4,11 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "../Home.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import { _formatQuestion } from "../_Data";
+
 
 class Home extends Component {
   constructor(props) {
     super(props);
-
     this.toPollPage = this.toPollPage.bind(this);
     this.toPollResults = this.toPollResults.bind(this);
     this.returnAvatar = this.returnAvatar.bind(this);
@@ -163,7 +162,6 @@ class Home extends Component {
 
 function mapStateToProps(state, { id }) {
   const question = state.questions[id];
-  // const formattedQuestion =  _formatQuestion(question1.optionOne,question1.optionTwo,question1.author)
   const usersArray = Object.values(state.users);
   return {
     questions: state.questions,

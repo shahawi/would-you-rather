@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-
 import { connect } from "react-redux";
-import { _formatQuestion, _saveQuestionAnswer } from "../_Data";
 import Card from "react-bootstrap/Card";
-import { Button } from "bootstrap";
 import input from "react-input";
-import { Router, withRouter } from "react-router";
+import {  withRouter } from "react-router";
 import { addQuestionAnswer } from "../actions/questions";
 
 class PollPage extends Component {
@@ -33,7 +30,6 @@ class PollPage extends Component {
     const qid = this.props.id;
     const answer = this.state.choice;
     const authedUser = this.props.authedUser;
-    const user = this.props.users[this.props.authedUser];
     const dispatch = this.props.dispatch
     dispatch(addQuestionAnswer (authedUser, qid,answer))
     this.props.history.push(`/results/${this.props.id}`)
@@ -44,14 +40,8 @@ class PollPage extends Component {
     if (this.props.authedUser === null) {
       alert("Please login first");
       this.props.history.push(`/Login`);
-    } else {
-      const question = this.props.questions[this.props.id];
-      const formattedQuestion = _formatQuestion(
-        question.optionOne,
-        question.optionTwo,
-        question.author
-      );
     }
+    console.log('test', this.props)
   }
 
   render() {
@@ -59,7 +49,6 @@ class PollPage extends Component {
       <div style={{ marginLeft: "10rem" }}>
         {this.props.authedUser !== null && (
           <Card style={{ width: "18rem" }}>
-            {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
             <Card.Body>
               <Card.Title>
                 {this.props.questions[this.props.id].author} asks:
@@ -97,7 +86,6 @@ function mapStateToProps(state, props) {
     state,
     id,
     authedUser: state.authedUser,
-    questions: state.questions,
     users: state.users,
   };
 }

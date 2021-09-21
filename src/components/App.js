@@ -9,8 +9,7 @@ import Nav from "../UI/Nav";
 
 import Pollpage from "./Pollpage";
 import { Switch } from "react-router-dom/cjs/react-router-dom.min";
-import AnsweredQuestions from "./AnsweredQuestions";
-import UnAnsweredQuestions from "./UnAnsweredQuestions";
+
 import PollResults from "./PollResults";
 import AddNewQuestion from "./AddNewQuestion";
 import Leaderboard from "./Leaderboard";
@@ -27,24 +26,30 @@ class App extends Component {
         <Fragment>
           <Nav />
 
-          <div style = {{marginBottom: "10rem"}}>
+          <div style={{ marginBottom: "10rem" }}>
             <LoadingBar />
             <div className="container">
               {this.props.loading === true ? (
                 <div></div>
               ) : (
-                <div style = {{
-                  textalign: "center"}}>
+                <div
+                  style={{
+                    textalign: "center",
+                  }}
+                >
                   {this.props.authedUser !== null &&
-                    this.props.authedUser !== undefined && <Logout style = {{  width: "50%",marginLeft: "10rem"}} />}
+                    this.props.authedUser !== undefined && (
+                      <Logout style={{ width: "50%", marginLeft: "10rem" }} />
+                    )}
 
                   <Switch>
                     <Route path="/" exact component={Login} />
                     <Route path={["/Home"]} component={Home} />
                     <Route path="/Login" component={Login} />
-                    <Route path="/Answered" component={AnsweredQuestions} />
-                    <Route path="/Unanswered" component={UnAnsweredQuestions} />
-                    <Route path="/questions/:question_id" component={Pollpage} />
+                    <Route
+                      path="/questions/:question_id"
+                      component={Pollpage}
+                    />
                     <Route path="/results/:id" component={PollResults} />
                     <Route path="/add" component={AddNewQuestion} />
                     <Route path="/leaderboard" component={Leaderboard} />

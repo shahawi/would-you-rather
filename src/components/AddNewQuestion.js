@@ -1,7 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import Card from "react-bootstrap/Card";
-import { useState } from "react";
 import { _saveQuestion } from "../_Data";
 import { addQuestion } from "../actions/questions";
 

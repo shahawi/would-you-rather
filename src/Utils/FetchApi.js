@@ -1,32 +1,25 @@
 import {
-    _getUsers,
-    _getQuestions,
-    _saveQuestion,
-    _saveQuestionAnswer,
-} from '../_Data'
+  _getUsers,
+  _getQuestions,
+  _saveQuestion,
+  _saveQuestionAnswer,
+} from "../_Data";
 
 export function getInitialData() {
-    return Promise.all([
-        _getUsers(),
-        _getQuestions(),
-    ]).then(([users, questions]) => ({
-        users,
-        questions,
-    })).catch((e)  =>
-{
-    console.log(e)
-}
-    )
+  return Promise.all([_getUsers(), _getQuestions()])
+    .then(([users, questions]) => ({
+      users,
+      questions,
+    }))
+    .catch((e) => {
+      console.log(e);
+    });
 }
 
 export function saveQuestion(data) {
-    return _saveQuestion(data)
+  return _saveQuestion(data);
 }
 
-export function saveQuestionAnswer( authedUser,
-    qid,
-    answer) {
-    return _saveQuestionAnswer( authedUser,
-        qid,
-        answer)
+export function saveQuestionAnswer(authedUser, qid, answer) {
+  return _saveQuestionAnswer(authedUser, qid, answer);
 }
