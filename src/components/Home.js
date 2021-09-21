@@ -4,19 +4,19 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "../Home.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import { setAuthedUser } from "../actions/authedUser";
 
 class Home extends Component {
-constructor(props)
-{
-super(props)
+  constructor(props) {
+    super(props);
 
-this.toPollPage = this.toPollPage.bind(this)
-this.toPollResults = this.toPollResults.bind(this)
-}
+    this.toPollPage = this.toPollPage.bind(this);
+    this.toPollResults = this.toPollResults.bind(this);
+  }
+
 
   componentDidMount() {
     if (this.props.authedUser === null) {
-      alert("Please login first");
       this.props.history.push(`/Login`);
     }
   }
@@ -48,9 +48,10 @@ this.toPollResults = this.toPollResults.bind(this)
           <Fragment>
             <div
               style={{
-                marginLeft: "10rem",
+                marginLeft: "5rem",
               }}
             >
+
               <Tabs>
                 <TabList>
                   <Tab>Unanswered Questions</Tab>

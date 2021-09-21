@@ -5,11 +5,10 @@ export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
 export const SAVE_QUESTION = 'SAVE_QUESTION'
 export const SAVE_QUESTION_ANSWER = 'SAVE_QUESTION_ANSWER'
 
-function addQuestion ({ id, authedUser }) {
+export function addQuestion ( question ) {
   return {
     type: SAVE_QUESTION,
-    id,
-    authedUser,
+    question
   }
 }
 export function addQuestionAnswer ( authedUser,

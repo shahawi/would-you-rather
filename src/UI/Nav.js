@@ -1,34 +1,26 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-
+import "../nav.css"
 export default function Nav () {
   return (
     <nav className='nav' >
-      <ul style={{  height: "100px",
-  display: "flex",
-  flexDirection: "column",
-  flexWrap: "wrap",
-  }}>
+      <ul >
         <li>
-          <NavLink to='/Home' exact activeClassName='active' style = {{marginRight:'10rem'}} >
+          <NavLink to='/Home' exact activeClassName='active'  >
             Home
           </NavLink>
         </li>
+         <li>
+          <NavLink to='/add' activeClassName='active'>
+            New Question
+          </NavLink>
+         </li> 
         <li>
-          <NavLink to='/Login' activeClassName='active'>
-            Login
+          <NavLink to='/leaderboard' activeClassName='active'>
+            Leaderboard
           </NavLink>
-        </li>
-        {/* <li>
-          <NavLink to='/Unanswered' activeClassName='active'>
-            UnAnswered questions
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/Answered' activeClassName='active'>
-            Answered questions
-          </NavLink>
-        </li> */}
+        </li> 
+    
       </ul>
     </nav>
   )
