@@ -42,6 +42,12 @@ usersArray.sort((a,b) => (b.questions.length+Object.keys(b.answers).length) - (a
                   >
                     <div className="card border-primary mb-3">
                       <h5 className="card-title">{user.name}</h5>
+                      <img
+                            alt="avatar"
+                            src={`${user.avatarURL}`}
+                            height="60px"
+                            width="60px"
+                          ></img>
                       <h6 className="card-subtitle mb-2 text-muted">
                        Score
                       </h6>

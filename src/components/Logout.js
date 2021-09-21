@@ -23,8 +23,15 @@ class Logout extends Component {
     console.log(user[0]);
     return (
       <div style = {{marginLeft : "10rem", marginBottom:"2rem", marginTop: "2rem"}}>
+             <img
+                            alt="avatar"
+                            src={`${user[0].avatarURL}`}
+                            height="60px"
+                            width="60px"
+                          ></img>
         <div>{user[0].name}</div>
         <button onClick={this.logout}>Log out</button>
+        <hr/>
       </div>
     );
   }
