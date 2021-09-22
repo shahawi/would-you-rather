@@ -9,11 +9,11 @@ class PollResults extends Component {
     this.handlecolor = this.handlecolor.bind(this);
   }
   componentDidMount() {
-    if (this.props.authedUser === null) {
-      alert("Please login first");
-      this.props.history.push(`/Login`);
-    } else {
-    }
+    // if (this.props.authedUser === null) {
+    //   alert("Please login first");
+    //   this.props.history.push(`/Login`);
+    // } else {
+    // }
   }
 
   handlecolor(option, question) {

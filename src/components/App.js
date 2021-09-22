@@ -2,7 +2,8 @@ import React, { Component, Fragment } from "react";
 import { handleInitialData } from "../actions/LoadData";
 import { connect } from "react-redux";
 import Login from "./Login";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, } from "react-router-dom";
 import LoadingBar from "react-redux-loading";
 import Home from "./Home";
 import Nav from "../UI/Nav";
@@ -44,15 +45,15 @@ class App extends Component {
 
                   <Switch>
                     <Route path="/" exact component={Login} />
-                    <Route path={["/Home"]} component={Home} />
+                    <ProtectedRoute authedUser = {this.props.authedUser} path={["/Home"]} component={Home} />
                     <Route path="/Login" component={Login} />
-                    <Route
+                    <ProtectedRoute authedUser = {this.props.authedUser}
                       path="/question/:id"
                       component={Pollpage}
                     />
-                    <Route path="/results/:id" component={PollResults} />
-                    <Route path="/add" component={AddNewQuestion} />
-                    <Route path="/leaderboard" component={Leaderboard} />
+                    <ProtectedRoute authedUser = {this.props.authedUser} path="/results/:id" component={PollResults} />
+                    <ProtectedRoute authedUser = {this.props.authedUser} path="/add" component={AddNewQuestion} />
+                    <ProtectedRoute authedUser = {this.props.authedUser} path="/leaderboard" component={Leaderboard} />
                   </Switch>
                 </div>
               )}
@@ -72,5 +73,25 @@ function mapStateToProps(state) {
     authedUser: state.authedUser,
   };
 }
+
+
+function ProtectedRoute({ component: Component,authedUser, ...restOfProps }) {
+ if(authedUser=== null)
+ {
+   alert("Please login first!!")
+ }
+  const isAuthenticated = authedUser !== null;
+
+  return (
+    <Route
+    {...restOfProps}
+      render={(props) =>
+        isAuthenticated ? <Component {...props} /> : <Redirect to="/Login" />
+      }
+    />
+  );
+}
+
+
 
 export default connect(mapStateToProps)(App);

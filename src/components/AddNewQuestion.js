@@ -6,10 +6,10 @@ import { addQuestion } from "../actions/questions";
 
 class AddNewQuestion extends Component {
   componentDidMount() {
-    if (this.props.authedUser === null) {
-      alert("Please login first");
-      this.props.history.push(`/Login`);
-    }
+    // if (this.props.authedUser === null) {
+    //   alert("Please login first");
+    //   this.props.history.push(`/Login`);
+    // }
   }
   constructor(props) {
     super(props);
