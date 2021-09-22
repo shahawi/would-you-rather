@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
 import { connect } from "react-redux";
 import Select from "react-select";
 import "../login.css";
 import { setAuthedUser } from "../actions/authedUser";
+import { withRouter, BrowserRouter as Router } from "react-router-dom";
 
 class Login extends Component {
   componentDidMount() {
@@ -14,8 +14,13 @@ class Login extends Component {
 
   handleChange = (e) => {
     const { dispatch } = this.props;
-    dispatch(setAuthedUser(e.id));
-    this.props.history.push(`/Home`);
+    if (this.props.location.state !== undefined) {
+      dispatch(setAuthedUser(e.id));
+      this.props.history.push(this.props.location.state.sentpath);
+    } else {
+      dispatch(setAuthedUser(e.id));
+      this.props.history.push(`/Home`);
+    }
   };
 
   render() {
@@ -54,4 +59,4 @@ function mapStateToProps({ users, authedUser }) {
   };
 }
 
-export default connect(mapStateToProps)(Login);
+export default withRouter(connect(mapStateToProps)(Login));

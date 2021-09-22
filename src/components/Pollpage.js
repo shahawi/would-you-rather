@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Card from "react-bootstrap/Card";
 import input from "react-input";
-import {  withRouter } from "react-router";
+import { withRouter } from "react-router";
 import { addQuestionAnswer } from "../actions/questions";
 
 class PollPage extends Component {
@@ -30,46 +30,46 @@ class PollPage extends Component {
     const qid = this.props.id;
     const answer = this.state.choice;
     const authedUser = this.props.authedUser;
-    const dispatch = this.props.dispatch
-    dispatch(addQuestionAnswer (authedUser, qid,answer))
-    this.props.history.push(`/Home`)
-
-
+    const dispatch = this.props.dispatch;
+    dispatch(addQuestionAnswer(authedUser, qid, answer));
+    this.props.history.push(`/results/${qid}`);
   }
   componentDidMount() {
-
+    if (
+      this.props.questions[this.props.id] === undefined ||
+      this.props.questions[this.props.id] === null
+    ) {
+      this.props.history.replace("../*");
+    }
   }
 
   render() {
     return (
-      <div style={{ marginLeft: "10rem" }}>
-        {this.props.authedUser !== null && (
-          <Card style={{ width: "18rem" }}>
-            <Card.Body>
-              <Card.Title>
-                {this.props.questions[this.props.id].author} asks:
-              </Card.Title>
-              <Card.Text>Would you rather?</Card.Text>
-              <div onChange={this.onChangeValue}>
-                <input
-                  type="radio"
-                  value="optionOne"
-                  name="radio"
-                />
-                {this.props.questions[this.props.id].optionOne.text}
-                <br />
-                <input
-                  type="radio"
-                  value="optionTwo"
-                  name="radio"
-                />
-                {this.props.questions[this.props.id].optionTwo.text}
-                <br />
-                <button onClick={this.handleSubmit}>Submit</button>
-              </div>
-            </Card.Body>
-          </Card>
-        )}
+      <div>
+        {this.props.questions[this.props.id] !== undefined &&
+          this.props.questions[this.props.id] !== null && (
+            <div style={{ marginLeft: "10rem" }}>
+              {this.props.authedUser !== null && (
+                <Card style={{ width: "18rem" }}>
+                  <Card.Body>
+                    <Card.Title>
+                      {this.props.questions[this.props.id].author} asks:
+                    </Card.Title>
+                    <Card.Text>Would you rather?</Card.Text>
+                    <div onChange={this.onChangeValue}>
+                      <input type="radio" value="optionOne" name="radio" />
+                      {this.props.questions[this.props.id].optionOne.text}
+                      <br />
+                      <input type="radio" value="optionTwo" name="radio" />
+                      {this.props.questions[this.props.id].optionTwo.text}
+                      <br />
+                      <button onClick={this.handleSubmit}>Submit</button>
+                    </div>
+                  </Card.Body>
+                </Card>
+              )}
+            </div>
+          )}
       </div>
     );
   }
@@ -83,7 +83,7 @@ function mapStateToProps(state, props) {
     id,
     authedUser: state.authedUser,
     users: state.users,
-    questions: state.questions
+    questions: state.questions,
   };
 }
 

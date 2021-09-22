@@ -5,7 +5,6 @@ import "../Home.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
-
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -21,9 +20,7 @@ class Home extends Component {
       url,
     };
   }
-  componentDidMount() {
-
-  }
+  componentDidMount() {}
 
   toPollPage = (e, id) => {
     e.preventDefault();
@@ -99,7 +96,7 @@ class Home extends Component {
                             type="submit"
                             onClick={(e) => this.toPollPage(e, question.id)}
                           >
-                            View poll
+                            Answer poll
                           </button>
                         </div>
                       </div>

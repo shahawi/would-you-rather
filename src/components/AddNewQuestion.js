@@ -5,9 +5,7 @@ import { _saveQuestion } from "../_Data";
 import { addQuestion } from "../actions/questions";
 
 class AddNewQuestion extends Component {
-  componentDidMount() {
-  
-  }
+  componentDidMount() {}
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -24,10 +22,10 @@ class AddNewQuestion extends Component {
     const optionTwoText = this.state.optionTwo;
     const dispatch = this.props.dispatch;
     const author = this.props.authedUser;
-     _saveQuestion({ optionOneText, optionTwoText, author }).then((question) =>
+    _saveQuestion({ optionOneText, optionTwoText, author }).then((question) =>
       dispatch(addQuestion(question))
     );
-    this.props.history.push(`/Home`)
+    this.props.history.push(`/Home`);
   }
 
   handleChange(e) {

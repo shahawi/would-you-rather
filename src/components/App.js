@@ -3,7 +3,7 @@ import { handleInitialData } from "../actions/LoadData";
 import { connect } from "react-redux";
 import Login from "./Login";
 import { Redirect } from "react-router-dom";
-import { BrowserRouter as Router, Route, } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import LoadingBar from "react-redux-loading";
 import Home from "./Home";
 import Nav from "../UI/Nav";
@@ -15,6 +15,7 @@ import PollResults from "./PollResults";
 import AddNewQuestion from "./AddNewQuestion";
 import Leaderboard from "./Leaderboard";
 import Logout from "./Logout";
+import Lost from "./Lost";
 
 class App extends Component {
   componentDidMount() {
@@ -45,15 +46,33 @@ class App extends Component {
 
                   <Switch>
                     <Route path="/" exact component={Login} />
-                    <ProtectedRoute authedUser = {this.props.authedUser} path={["/Home"]} component={Home} />
+                    <ProtectedRoute
+                      authedUser={this.props.authedUser}
+                      path={["/Home"]}
+                      component={Home}
+                    />
                     <Route path="/Login" component={Login} />
-                    <ProtectedRoute authedUser = {this.props.authedUser}
+                    <ProtectedRoute
+                      authedUser={this.props.authedUser}
                       path="/questions/:id"
                       component={Pollpage}
                     />
-                    <ProtectedRoute authedUser = {this.props.authedUser} path="/results/:id" component={PollResults} />
-                    <ProtectedRoute authedUser = {this.props.authedUser} path="/add" component={AddNewQuestion} />
-                    <ProtectedRoute authedUser = {this.props.authedUser} path="/leaderboard" component={Leaderboard} />
+                    <ProtectedRoute
+                      authedUser={this.props.authedUser}
+                      path="/results/:id"
+                      component={PollResults}
+                    />
+                    <ProtectedRoute
+                      authedUser={this.props.authedUser}
+                      path="/add"
+                      component={AddNewQuestion}
+                    />
+                    <ProtectedRoute
+                      authedUser={this.props.authedUser}
+                      path="/leaderboard"
+                      component={Leaderboard}
+                    />
+                    <Route path="*" component={Lost} />
                   </Switch>
                 </div>
               )}
@@ -74,24 +93,28 @@ function mapStateToProps(state) {
   };
 }
 
-
-function ProtectedRoute({ component: Component,authedUser, ...restOfProps }) {
- if(authedUser=== null)
- {
-   alert("Please login first!!")
- }
+function ProtectedRoute({ component: Component, authedUser, ...restOfProps }) {
+  if (authedUser === null) {
+    alert("Please login first!!");
+  }
   const isAuthenticated = authedUser !== null;
-
   return (
     <Route
-    {...restOfProps}
+      {...restOfProps}
       render={(props) =>
-        isAuthenticated ? <Component {...props} /> : <Redirect to="/Login" />
+        isAuthenticated ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/Login",
+              state: { sentpath: props.location.pathname },
+            }}
+          />
+        )
       }
     />
   );
 }
-
-
 
 export default connect(mapStateToProps)(App);
