@@ -48,7 +48,7 @@ class App extends Component {
                     <ProtectedRoute authedUser = {this.props.authedUser} path={["/Home"]} component={Home} />
                     <Route path="/Login" component={Login} />
                     <ProtectedRoute authedUser = {this.props.authedUser}
-                      path="/question/:id"
+                      path="/questions/:id"
                       component={Pollpage}
                     />
                     <ProtectedRoute authedUser = {this.props.authedUser} path="/results/:id" component={PollResults} />

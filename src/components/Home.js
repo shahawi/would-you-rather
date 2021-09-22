@@ -22,14 +22,12 @@ class Home extends Component {
     };
   }
   componentDidMount() {
-    if (this.props.authedUser === null) {
-      this.props.history.push(`/Login`);
-    }
+
   }
 
   toPollPage = (e, id) => {
     e.preventDefault();
-    this.props.history.push(`/question/${id}`);
+    this.props.history.push(`/questions/${id}`);
   };
   toPollResults = (e, id) => {
     e.preventDefault();

@@ -6,10 +6,7 @@ import { addQuestion } from "../actions/questions";
 
 class AddNewQuestion extends Component {
   componentDidMount() {
-    // if (this.props.authedUser === null) {
-    //   alert("Please login first");
-    //   this.props.history.push(`/Login`);
-    // }
+  
   }
   constructor(props) {
     super(props);
@@ -30,6 +27,7 @@ class AddNewQuestion extends Component {
      _saveQuestion({ optionOneText, optionTwoText, author }).then((question) =>
       dispatch(addQuestion(question))
     );
+    this.props.history.push(`/Home`)
   }
 
   handleChange(e) {

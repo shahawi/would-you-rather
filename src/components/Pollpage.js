@@ -37,11 +37,7 @@ class PollPage extends Component {
 
   }
   componentDidMount() {
-    // if (this.props.authedUser === null) {
-    //   alert("Please login first");
-    //   this.props.history.push(`/Login`);
-    // }
-    // console.log('test', this.props)
+
   }
 
   render() {

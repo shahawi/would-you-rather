@@ -4,10 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 class Leaderboard extends Component {
   componentDidMount() {
-    // if (this.props.authedUser === null) {
-    //   alert("Please login first");
-    //   this.props.history.push(`/Login`);
-    // }
+
   }
   render() {
     var usersArray = this.props.usersArray;
